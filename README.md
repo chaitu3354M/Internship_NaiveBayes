@@ -1,1 +1,1 @@
-# my_internship
+# internship_NaiveBayes
