@@ -1,0 +1,220 @@
+------------------ PSEUDOCODE FOR NAIVE BAYES CLASSIFICATION ALGORITHM -----------------------
+
+
+Naive Bayes is a supervised machine learning algorithm that used to make the predictions based on the probability.
+
+###  STEP WISE FLOW CHART ####
+
+
+
+                                    +-----------------------+
+                                    | Load training data     |
+                                    +-----------------------+
+                                                |
+                                                
+                                    +-----------------------+
+                                    | Load testing data      |
+                                    +-----------------------+
+                                                |
+                                                
+                                    +-----------------------+
+                                    | Preprocess data        |
+                                    +-----------------------+                
+                                                |
+                                                
+                                   +------------------------------+
+                                   | Train Naive Bayes model   |
+                                   +------------------------------+
+                                                |
+
+                                +--------------------------------------+
+                                 | Find the class probability's of     |
+                                 |  each class in give instances        |
+                                +-------------------------------------+      
+                                                    |   
+     
+                           +---------------------------------------+
+                           | Predict class labels for test dataset |
+                           +---------------------------------------+
+                                                |
+                                                  
+                          +------------------------------------------+
+                           | select the class which having the        |
+                           | highest posterior probability              |
+                          +------------------------------------------+          
+                                                   |
+                                                               
+                                  +----------------------------------+
+                                  | Evaluate classification             |
+                                  | performance on test dataset      |
+                                  +----------------------------------+
+                                                |
+                                                
+                                    +----------------------+
+                                    | Finish                      |
+                                    +----------------------+
+
+
+
+BREAST CANCER
+
+Breast cancer is a type of cancer that forms in the cells of the breast. It is one of the most common cancer affecting the women in worldwide, and in some rare cases, it can also affect men.
+
+By using the data, need to predict wheather a given tumour is 'Malignant(cancerous) or Benign (non-cancerous)' based the various features.
+
+The dataset contains 30 features and 569 instances approx.
+
+The features are
+
+01. id -it represents the patient.
+
+02. radius_mean: Mean of distances from center     to points on the perimeter of the tumor
+
+03.texture_mean: Standard deviation of gray-scale values
+
+04.perimeter_mean: Perimeter of the tumor
+
+area_mean: Area of the tumor
+
+05.smoothness_mean: Local variation in radius lengths
+
+06.compactness_mean: Perimeter^2 / area - 1.0
+
+07.concavity_mean: Severity of concave portions of the contour
+
+08.concave points_mean: Number of concave portions of the contour
+
+09.symmetry_mean: Symmetry of the tumor
+
+10.fractal_dimension_mean: "Coastline approximation" - 1
+
+11.radius_se: Standard error of distances from center to points on the perimeter
+
+12.texture_se: Standard error of gray-scale values
+
+13.perimeter_se: Standard error of the tumor perimeter
+
+14.area_se: Standard error of the tumor area
+
+15.smoothness_se: Standard error of local variation in radius lengths
+
+16.compactness_se: Standard error of perimeter^2 / area - 1.0
+
+17.concavity_se: Standard error of severity of concave portions of the contour
+
+18.concave points_se: Standard error for number of concave portions of the contour
+
+19.symmetry_se: Standard error for symmetry of the tumor
+
+20.fractal_dimension_se: Standard error for "coastline approximation" - 1
+
+21.radius_worst: Worst mean value of distances from center to points on the perimeter
+
+22.texture_worst: Worst mean value for standard deviation of gray-scale values
+
+23.perimeter_worst: Worst mean value for tumor perimeter
+
+24.area_worst: Worst mean value for tumor area
+
+25.smoothness_worst: Worst mean value for local variation in radius lengths
+
+26.compactness_worst: Worst mean value for perimeter^2 / area - 1.0
+
+27.concavity_worst: Worst mean value for severity of concave portions of the contour
+
+28.concave points_worst: Worst mean value for number of concave portions of the contour
+
+29.symmetry_worst: Worst mean value for symmetry of the tumor
+
+30.fractal_dimension_worst: Worst mean value for "coastline approximation" - 1
+
+Importing Libraries and Load the Dataset 
+
+- Pandas : It is used to manipulate and analysis the data.
+
+‎-Numpy : It is used for working with arrays and perform the mathematical operations.
+
+-Matplotlib : It is used to visualise the data.
+
+- Seaborn : It is used to visualise the data and exploring the relationships between variables.
+
+###  EXPLORATORY DATA ANALYSIS
+
+Command- .shape used to check the no.of rows and columns.
+Command- .info() used to know the info of dataset.
+Command- .describe() is used to describe the descriptive statistics.
+Command- .isnull() is used to check the null value's.
+
+### NULL VALUE IMPUTATION
+
+Command- .fillna() is used to fill the null values if any present in the dataset by using the mean, median or mode.
+
+VISUALISE THE DATA 
+
+By using the different plot's used to visualise the data, plots are like Histogram, Barplot, Scatter plot, Box plot are used.
+
+SPLIT THE DATA INTO TRAIN AND TEST
+
+train_test_split - it is used to evaluate the model performance. It devide the dataset into two separate sets on the basis of percentage.
+
+train_data- the train data is used to train the model to learn the underlying patterns and the relationships in the data.
+
+test_data- the test data is used to evaluate the model performance on new unseen data.
+
+MODEL BUILDING
+
+Set the parameters of Naive bayes classifier
+
+The model is based on Naive baye's formula
+
+## Baye's Theorem##
+
+P(A|B) = P(B|A) * P(A) / P(B)
+
+P(A|B) = Posterior probability
+P(B|A) = Likeliihood Probability
+P(A) = Prior Probability
+P(B) = Probability of Event B
+
+A. Compute the prior probability of each class in the training data.
+
+Prior[c] = count(y_i = c) / n
+
+B. Compute the conditional prabability of the features in each instances.
+
+
+Cond_prob[j][c] = (count_jc + 1) / (count_c+2)
+
+     count_jc = count(x_i[j] = 1 and y_i = c)
+     count_c = count(y_i = c)
+
+C. Compute the posterior probability of each class in given instances.
+
+Post_prob[c] = prior[c] * (1- cond_prob[j][c])
+
+
+select the class with highest posterior probability as the predicted class.
+
+MODEL EVALUATION 
+
+Predict the labels for the instances in test_data
+
+## METRICS USED ###
+
+
+Accuracy : Find the accuracy 
+          Correct_predictions / total_predictions
+F1 score:
+          2 * Precision * Recall / (Precision + Recall)
+Recall:
+        True positives / (true positives + false negatives)
+Precision:
+       True positives / (true positives + false positives)
+
+
+
+
+
+
+
+
